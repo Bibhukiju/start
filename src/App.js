@@ -1,25 +1,18 @@
-import logo from './logo.svg';
-import './App.css';
+import React, {useContext} from 'react';
+import './assets/layout.scss'
+import VideoCreator from "./components/VideoCreator";
+import UseAppData from "./hooks/UseAppData";
+import {Context} from "./context";
+import {setSelectedDataFunc} from "./context/chooseDataAction";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
+const App = () => {
+    const {setSelectedData, selectedData} = UseAppData()
+    const {dispatch} = useContext(Context)
+    const handleChange = (value) => {
+        dispatch(setSelectedDataFunc(dispatch,value))
+    }
+    return(
+      <div>
+        <VideoCreator />
+      </div>
+    )
